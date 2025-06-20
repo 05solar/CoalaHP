@@ -1,11 +1,10 @@
 // src/pages/LoginPage/LoginPage.js
 import React from "react";
-import { useNavigate } from "react-router-dom"; 
-
+import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 
 export default function LoginPage() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleLoginClick = () => {
     navigate("/login");
@@ -14,21 +13,22 @@ export default function LoginPage() {
   const handleSignupClick = () => {
     navigate("/signup");
   };
-    const goToHome = () => {
-    navigate("/"); // 메인페이지로 이동
-  };
 
+  const goToHome = () => {
+    navigate("/");
+  };
 
   return (
     <div className="login-page">
-      <header className="login-header">
+      <header className="header">
         <div className="logo-area">
           <img src="/logo.png" alt="전북대학교 로고" className="logo" />
           <span className="title" onClick={goToHome} style={{ cursor: "pointer" }}>
             COALA
           </span>
         </div>
-        <nav className="nav-menu">
+
+        <nav className="nav">
           <a href="#">Introduce</a>
           <a href="#">Notice</a>
           <a href="#">Board</a>
@@ -36,8 +36,11 @@ export default function LoginPage() {
           <a href="#">Game</a>
           <a href="#">Member</a>
         </nav>
-        <div className="login-signup">
-          <a href="#">LOGIN</a> | <a href="#">SIGNUP</a>
+
+        <div className="auth">
+          <button onClick={handleLoginClick} className="link-button">LOGIN</button>
+          {" | "}
+          <button onClick={handleSignupClick} className="link-button">SIGNUP</button>
         </div>
       </header>
 
@@ -50,7 +53,7 @@ export default function LoginPage() {
             <input type="email" placeholder="Enter your email" />
             <label>PASSWORD</label>
             <input type="password" placeholder="Enter your password" />
-            <a href="#" className="forgot-password">FORGOT YOU PASSWORD?</a>
+            <a href="#" className="forgot-password">FORGOT YOUR PASSWORD?</a>
             <button className="login-btn">LOGIN</button>
             <button className="signup-btn">SIGN UP</button>
           </div>

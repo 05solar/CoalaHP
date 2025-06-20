@@ -36,7 +36,7 @@ export default function MainPage() {
           <a href="#">Member</a>
         </nav>
 
-        {/* ✅ 로그인/회원가입 버튼으로 라우팅 처리 */}
+        {/*로그인/회원가입 버튼으로 라우팅 처리 */}
         <div className="auth">
           <button onClick={handleLoginClick} className="link-button">LOGIN</button>
           {" | "}
