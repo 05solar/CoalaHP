@@ -1,0 +1,135 @@
+/* src/pages/MainPage.css */
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.container {
+  min-height: 100vh;
+  background: white;
+  color: black;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #ccc;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: black;
+}
+
+.auth {
+  font-size: 14px;
+}
+
+/* Main Content */
+.main-content {
+  padding: 32px 16px;
+}
+
+.introduce-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.introduce-box {
+  flex: 1;
+  height: 160px;
+  background: #c8dcb1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.arrow {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Card Section */
+.card-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.card {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.card-header h3 {
+  text-transform: capitalize;
+}
+
+.plus-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.card-list li {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+/* Bottom Boxes */
+.bottom-boxes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.box {
+  height: 128px;
+  border-radius: 16px;
+}
+
+.box-left,
+.box-right {
+  background-color: #c5e1a5;
+}
+
+.box-center {
+  background-color: #aed581;
+}

@@ -1,0 +1,134 @@
+/* src/pages/LoginPage/LoginPage.css */
+.login-page {
+  font-family: sans-serif;
+  background-color: #fff;
+  color: #000;
+  min-height: 100vh;
+}
+
+.login-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  height: 40px;
+}
+
+.club-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+}
+
+.login-signup {
+  font-size: 14px;
+}
+
+.login-signup a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 4px;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  padding: 64px 16px;
+}
+
+.login-box {
+  display: flex;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 800px;
+  overflow: hidden;
+}
+
+.login-form {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-form h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.sub-text {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 16px;
+}
+
+.login-form label {
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.login-form input {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 24px;
+  outline: none;
+}
+
+.forgot-password {
+  text-align: right;
+  font-size: 11px;
+  color: #888;
+  text-decoration: none;
+  margin-top: 4px;
+}
+
+.login-btn {
+  margin-top: 16px;
+  padding: 10px;
+  border-radius: 24px;
+  border: none;
+  background: linear-gradient(to right, #4a785e, #f0f0b0);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signup-btn {
+  padding: 10px;
+  border-radius: 24px;
+  border: 1px solid #4a785e;
+  background: white;
+  color: #4a785e;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-image {
+  flex: 1;
+  background: linear-gradient(to bottom right, #4a785e, #acc0a7);
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
