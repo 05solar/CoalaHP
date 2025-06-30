@@ -18,7 +18,115 @@ body {
   align-items: center;
   padding: 16px;
   border-bottom: 1px solid #ccc;
+  position: relative;
+  z-index: 10;
 }
+
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  /* 1) 모바일에서 기본 숨김 */
+  .nav:not(.open),
+  .auth:not(.open) {
+    display: none;
+  }
+
+  /* 2) 햄버거 버튼만 보이도록 */
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+    /* 로그인·회원가입 버튼 그룹 */
+  .auth.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;    
+    left: 200px;
+    right: 16px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 0.25rem 0;
+    z-index: 9;
+    transition: all 0.2s ease;
+  }
+
+  /* 버튼들 사이에 border 대신 margin 사용 */
+  .auth.open .link-button {
+    background: transparent;
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    text-align: left;
+    color: #333;
+    transition: background 0.2s;
+    margin: 0;            /* 기본 간격 리셋 */
+  }
+  /* 버튼 사이에 구분선 효과는 아래와 같이만 */
+  .auth.open .link-button + .link-button {
+    border-top: 1px solid #eee;
+  }
+
+  /* 호버/포커스 시 배경만 살짝 강조 */
+  .auth.open .link-button:hover,
+  .auth.open .link-button:focus {
+    background: #f5f5f5;
+  }
+
+  /* 3) isOpen === true 이면 nav.open/auth.open 만 보이게 */
+  .nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: calc(56px + 8.5rem);
+    left: 200px;    
+    right: 16px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 0.5rem 0;
+    z-index: 9;
+    transition: all 0.2s ease;
+
+  }
+
+
+  .nav.open a,
+  .auth.open .link-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 1rem;  
+    background: transparent;
+    transition: background 0.2s;
+    /* border-top 대신 box-shadow로 구분선 효과 */
+    box-shadow: inset 0px 1px 0px #eee;
+  }
+
+  /* (B) 첫 항목의 구분선만 제거 */
+  .nav.open a:first-child,
+  .auth.open .link-button:first-child {
+    box-shadow: none;
+  }
+
+  /* (C) 호버 시 배경 강조 */
+  .nav.open a:hover,
+  .auth.open .link-button:hover {
+    background: #f5f5f5;
+  }
+}
+
 
 .logo-area {
   display: flex;
@@ -33,6 +141,12 @@ body {
 .title {
   font-size: 20px;
   font-weight: bold;
+}
+
+.nav {
+  display: flex;
+  gap: 10px;      /* 메뉴 사이 간격 */
+  align-items: center;
 }
 
 .nav a {
@@ -52,28 +166,78 @@ body {
 
 .introduce-section {
   display: flex;
+  justify-content: center;    
   align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 32px;
+  margin: 20px 0 20px;        
 }
 
-.introduce-box {
-  flex: 1;
-  height: 160px;
-  background: #c8dcb1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: 500;
+
+.container-carrossel {
+  width: 25%;           /* 부모 너비를 100% 채움 */
+  height: 120px;         /* 고정 높이 또는 aspect-ratio 사용 */
+  perspective: 1000px;
+  margin: 0 auto 2rem;
+}
+.carrossel {
+  --rotatey: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: rotateY(var(--rotatey));
+  transform-style: preserve-3d;
+  cursor: grab;
+  user-select: none;
+
+  animation: rotateCarousel 30s linear infinite;
+
 }
 
-.arrow {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
+.carrossel-item {
+  --rotatey: 0;
+  --tz: 0px;
+  opacity: 0.5;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  transition: opacity 0.5s;
+  transform: rotateY(var(--rotatey)) translateZ(var(--tz));
+  background: linear-gradient(-229deg, #fbd52d, #ef3a7b);
+}
+
+.carrossel-item:nth-child(2) {
+  background: linear-gradient(-229deg, #ff70af, #5fa8f5);
+}
+.carrossel-item:nth-child(3) {
+  background: linear-gradient(-229deg, #0cebeb, #29ffc6);
+}
+.carrossel-item:nth-child(4) {
+  background: linear-gradient(-229deg, #88f7f9, #048fff);
+}
+.carrossel-item:nth-child(5) {
+  background: linear-gradient(-229deg, #0093e9, #80d0c7);
+}
+.carrossel-item:nth-child(6) {
+  background: linear-gradient(-229deg, #cf91ff, #5782f5);
+}
+
+.carrossel-item:hover {
+  opacity: 1;
+}
+@keyframes rotateCarousel {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .container-carrossel {
+    --widthItem: 250px;
+    --heightItem: 200px;
+  }
 }
 
 /* Card Section */
