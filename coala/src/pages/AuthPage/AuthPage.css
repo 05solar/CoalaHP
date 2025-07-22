@@ -1,0 +1,106 @@
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* 1) 전체 배경 + 센터링 */
+.auth-page {
+  font-family: 'GmarketSansMedium', sans-serif;
+  background: #f6f5f7;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 40px;
+  box-sizing: border-box;
+}
+
+/* 2) 카드 컨테이너 */
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  margin-top: 8px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* 3) 상단 그라데이션 바 */
+.progress-bar {
+  height: 8px;
+  background: linear-gradient(to right, #4a785e, #f0f0b0);
+}
+
+/* 4) 폼 영역 */
+.form-area {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form-area h1 {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+.sub-text {
+  margin: 0 0 24px;
+  font-size: 14px;
+  color: #666;
+}
+.form-area label {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.form-area input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+}
+
+/* 5) 버튼 */
+.btn {
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: 24px;
+  padding: 12px 0;
+  font-size: 14px;
+  transition: opacity .2s;
+}
+.btn:hover {
+  opacity: 0.9;
+}
+.primary {
+  background: linear-gradient(to right, #4a785e, #f0f0b0);
+  color: #fff;
+  border: none;
+  margin-top: 12px;
+}
+.outline {
+  background: #fff;
+  color: #4a785e;
+  border: 2px solid #4a785e;
+  margin-top: 8px;
+}
+
+/* 6) 모바일 대응 */
+@media (max-width: 400px) {
+  .auth-card {
+    max-width: 100%;
+  }
+  .form-area {
+    padding: 20px;
+    gap: 12px;
+  }
+  .btn {
+    padding: 10px 0;
+  }
+}

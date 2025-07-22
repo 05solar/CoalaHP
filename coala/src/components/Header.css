@@ -1,0 +1,97 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #ccc;
+  position: relative;
+  background: white;
+  z-index: 1000;
+}
+
+.logo-area {
+  font-size: 1.25rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* 기본 nav 링크 (데스크탑) */
+.nav {
+  display: flex;
+  gap: 1rem;
+}
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* auth 버튼 그룹 (데스크탑) */
+.auth {
+  display: flex;
+  gap: 0.5rem;
+}
+.link-button {
+  text-decoration: none;
+  background: none;
+  border: none;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .nav,
+  .auth {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav.open,
+  .auth.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 0.5rem 0;
+    margin-top: 8px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .nav.open.show,
+  .auth.open.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav.open .nav-link,
+  .auth.open .link-button {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: #333;
+    border-top: 1px solid #eee;
+    background: transparent;
+  }
+  .nav.open .nav-link:first-child,
+  .auth.open .link-button:first-child {
+    border-top: none;
+  }
+  .nav.open .nav-link:hover,
+  .auth.open .link-button:hover {
+    background: #f5f5f5;
+  }
+}

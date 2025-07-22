@@ -20,30 +20,7 @@ export default function LoginPage() {
 
   return (
     <div className="login-page">
-      <header className="header">
-        <div className="logo-area">
-          <img src="/logo.png" alt="전북대학교 로고" className="logo" />
-          <span className="title" onClick={goToHome} style={{ cursor: "pointer" }}>
-            COALA
-          </span>
-        </div>
-
-        <nav className="nav">
-          <a href="#">Introduce</a>
-          <a href="#">Notice</a>
-          <a href="#">Board</a>
-          <a href="#">Event</a>
-          <a href="#">Game</a>
-          <a href="#">Member</a>
-        </nav>
-
-        <div className="auth">
-          <button onClick={handleLoginClick} className="link-button">LOGIN</button>
-          {" | "}
-          <button onClick={handleSignupClick} className="link-button">SIGNUP</button>
-        </div>
-      </header>
-
+  
       <main className="login-container">
         <div className="login-box">
           <div className="login-form">
