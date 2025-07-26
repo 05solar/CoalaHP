@@ -18,7 +18,7 @@ body {
 
 /* Main Content */
 .main-content {
-  padding: 32px 16px;
+  padding: 50px 16px;
 }
 
 /* Introduce Section */
@@ -45,7 +45,7 @@ body {
   transform-style: preserve-3d;
   cursor: grab;
   user-select: none;
-  animation: rotateCarousel 60s linear infinite;
+  animation: rotateCarousel 120s linear infinite;
 }
 
 .carrossel-item {
@@ -58,6 +58,10 @@ body {
   border-radius: 5px;
   transition: opacity 0.5s;
   transform: rotateY(var(--rotatey)) translateZ(var(--tz));
+}
+
+.carrossel-item.active {
+  opacity: 1;
 }
 
 .carrossel-item img {
@@ -85,6 +89,8 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
   margin-bottom: 32px;
+  padding: 20px 200px;
+
 }
 
 .card {
@@ -103,25 +109,65 @@ body {
   margin: 4px 0;
 }
 
-/* Bottom Boxes */
-.bottom-boxes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 40px;
+  display: flex;
+  align-items: center;
 }
 
-.box {
-  height: 128px;
+/* 좌우 버튼 */
+.slider-btn {
+  background: rgba(0,0,0,0.1);
+  border: none;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.slider-btn:hover {
+  background: rgba(0,0,0,0.2);
+}
+.slider-btn.prev  { margin-right: 8px; }
+.slider-btn.next  { margin-left: 8px; }
+
+/* 보이는 영역 */
+.slider {
+  overflow: hidden;
+  flex: 1;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* 트랙: 가로로 3배 크기, translateX 이동 */
+.slider-track {
+  display: flex;
+  width: 300%;               /* 슬라이드 개수(3) × 100% */
+  transition: transform 0.5s ease;
+}
+
+/* 각 슬라이드 */
+.slide {
+  flex: 1 0 100%;            /* 보이는 영역 너비의 100% */
+  height: 200px;
   border-radius: 16px;
 }
+.slide.box-left   { background-color: #c5e1a5; }
+.slide.box-center { background-color: #aed581; }
+.slide.box-right  { background-color: #c5e1a5; }
 
-.box-left,
-.box-right {
-  background-color: #c5e1a5;
-}
-
-.box-center {
-  background-color: #aed581;
+/* 모바일 대응: 버튼을 더 작게 */
+@media (max-width: 600px) {
+  .slider-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
 }
 
 /* 반응형 */

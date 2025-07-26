@@ -1,0 +1,145 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.board-page {
+  padding: 24px;
+  font-family: 'GmarketSansMedium', sans-serif;
+}
+
+.page-title {
+  margin-bottom: 16px;
+  padding: 0 300px; 
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.table-wrapper {
+  padding: 0 300px;     
+}
+
+
+.board-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  font-weight: 100 ;
+}
+
+.board-table th,
+.board-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  font-weight: 300 ;
+}
+
+.board-table th {
+  background: #f0f4ea;
+  font-weight: 300;
+}
+
+.title-cell {
+  cursor: pointer;
+  color: #333;
+  text-align: left;
+}
+
+.title-cell:hover {
+  text-decoration: underline;
+}
+
+/* ───────────────────────────────────────────── 
+   페이징 + 버튼 컨테이너
+───────────────────────────────────────────── */
+.pagination-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 24px; 
+  box-sizing: border-box;
+}
+
+
+.pagination {
+  display: flex;
+  gap: 4px;
+  margin: 0 auto; 
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  margin-left: 16px;
+  padding: 0 275px; 
+}
+
+/* 버튼 기본 스타일 유지 */
+.btn.write,
+.btn.edit {
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  transition: opacity 0.2s;
+}
+
+.btn.write {
+  background: linear-gradient(to right, #4a785e, #f0f0b0);
+  color: #fff;
+  border: none;
+}
+
+.btn.edit {
+  background: #fff;
+  color: #4a785e;
+  border: 2px solid #4a785e;
+}
+
+.btn.write:hover,
+.btn.edit:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+  .pagination-container {
+    display: flex;
+    flex-direction: column;   
+    justify-content: center;   
+    align-items: center;      
+    width: 100%;
+    padding: 0 8px; 
+    box-sizing: border-box;
+  }
+
+  .pagination {
+    display: flex;
+    gap: 4px;
+    margin: 0 auto 12px;       
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+    margin: 0;                 
+    padding: 0 5px;
+  }
+
+  .table-wrapper {
+    padding: 0 12px;
+  }
+
+  .board-table th,
+  .board-table td {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .page-title {
+    padding: 0 12px;
+  }
+}

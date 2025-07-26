@@ -5,14 +5,16 @@ import './Header.css';
 export default function Header() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const navRef = useRef(null);
+  const navRef  = useRef(null);
   const authRef = useRef(null);
 
   const toggleMenu = () => {
-    setIsOpen(open => !open);
+    const next = !isOpen;
+    setIsOpen(next);
+    // 짧은 delay 후 클래스 토글 (animate 등 CSS 활용 시)
     setTimeout(() => {
-      navRef.current?.classList.toggle('show', !isOpen);
-      authRef.current?.classList.toggle('show', !isOpen);
+      navRef.current?.classList.toggle('show', next);
+      authRef.current?.classList.toggle('show', next);
     }, 0);
   };
 
@@ -30,29 +32,32 @@ export default function Header() {
         className="menu-toggle"
         onClick={toggleMenu}
         aria-label="Toggle Menu"
-      >☰</button>
+      >
+        ☰
+      </button>
 
-      <nav ref={navRef} className={`nav ${isOpen ? 'open' : ''}`}>
-              {[
-                { path: 'introduce', label: '소개' },
-                { path: 'notice',    label: '공지사항' },
-                { path: 'board',     label: '게시판' },
-                { path: 'event',     label: '이벤트' },
-                { path: 'game',      label: '게임' },
-                { path: 'member',    label: '회원' },
-               ].map(({ path, label }) => (
-                <Link
-                  key={path}
-                  to={`/${path}`}
-                  className="nav-link"
-                  onClick={() => navigateTo(`/${path}`)}
-                >
-                  {label}
-                </Link>
-              ))}
+      <nav ref={navRef} className={`nav ${isOpen ? 'show' : ''}`}>
+        {[
+          { label: '소개',        to: '/introduce'      },
+          { label: '공지사항',    to: '/board/notice'   },
+          { label: '질답게시판',  to: '/board/qna'      },
+          { label: '자유게시판',  to: '/board/free'     },
+          { label: '이벤트',      to: '/event'          },
+          { label: '게임',        to: '/game'           },
+          { label: '회원',        to: '/member'         },
+        ].map(({ label, to }) => (
+          <Link
+            key={to}
+            to={to}
+            className="nav-link"
+            onClick={() => navigateTo(to)}
+          >
+            {label}
+          </Link>
+        ))}
       </nav>
 
-      <div ref={authRef} className={`auth ${isOpen ? 'open' : ''}`}>
+      <div ref={authRef} className={`auth ${isOpen ? 'show' : ''}`}>
         <Link
           to="/login"
           className="link-button"
@@ -69,5 +74,5 @@ export default function Header() {
         </Link>
       </div>
     </header>
-  );
+);
 }
