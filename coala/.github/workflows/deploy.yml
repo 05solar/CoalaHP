@@ -3,14 +3,14 @@ name: Deploy React App to GitHub Pages
 on:
   push:
     branches:
-      - master   # main 브랜치에 푸시될 때마다 작동
+      - master
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) 코드 체크아웃
+      # 1) 소스 체크아웃
       - uses: actions/checkout@v3
 
       # 2) Node.js 설치
@@ -27,9 +27,10 @@ jobs:
       - name: Build
         run: npm run build
 
-      # 5) 빌드 결과를 gh-pages 브랜치에 배포
+      # 5) gh-pages 브랜치로 배포
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
           publish_dir: ./build
