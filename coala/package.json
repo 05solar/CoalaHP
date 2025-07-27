@@ -1,7 +1,7 @@
 {
   "name": "coala",
   "version": "0.1.0",
-  "homepage": "https://COALA-jbnu.github.io/coala-web-fe",
+  "homepage": "https://05solar.github.io/CoalaHP",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
