@@ -2,9 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './BoardPage.css';
 
+import slide1 from "../../images/banner1.png";
+import slide2 from "../../images/banner2.png";
+import slide3 from "../../images/banner3.png";
+
+
 export default function BoardPage() {
   const { board } = useParams(); // 'notice' | 'qna' | 'free'
   const navigate = useNavigate();
+
+    // --- 슬라이더 상태 & 이미지 배열 ---
+  const slideImages = [slide1, slide2, slide3];
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSlideIndex((prev) => (prev + 1) % slideImages.length);
+    }, 6000); // 3초마다 슬라이드 전환
+    return () => clearInterval(interval);
+  }, [slideImages.length]);
 
   // 페이징
   const [page, setPage] = useState(1);
@@ -88,6 +104,21 @@ export default function BoardPage() {
 
   return (
     <div className="board-page">
+            {/* --- 자동 슬라이더 배너 --- */}
+      <section className="board-slider">
+        <div
+          className="slider-track"
+          style={{ transform: `translateX(-${slideIndex * 100}%)` }}
+        >
+          {slideImages.map((src, i) => (
+            <div
+              className="slide"
+              key={i}
+              style={{ backgroundImage: `url(${src})` }}
+            />
+          ))}
+        </div>
+      </section>
       <h2 className="page-title">
         {board === 'notice' ? '공지게시판' : board === 'qna' ? '질답게시판' : '자유게시판'}
       </h2>

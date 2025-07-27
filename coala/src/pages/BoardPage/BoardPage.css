@@ -1,15 +1,65 @@
+/* light / 300 */
 @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Gmarket Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+}
+/* regular / 500 */
+@font-face {
+  font-family: 'Gmarket Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+}
+/* bold / 700 */
+@font-face {
+  font-family: 'Gmarket Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
 }
 
+body, .board-table th, .board-table td {
+  font-family: 'Gmarket Sans', sans-serif;
+}
 
 .board-page {
   padding: 24px;
+  background: #FAFAFA;
   font-family: 'GmarketSansMedium', sans-serif;
 }
+
+
+
+.board-slider {
+  width: 100%;
+  max-width: 1100px;
+  height: 100px;      
+  margin: 0 auto 24px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+
+.board-slider .slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;      
+  overflow: hidden;
+}
+
+
+.board-slider .slide img {
+  max-height: 100%;   
+  max-width: 100%;    
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
 
 .page-title {
   margin-bottom: 16px;
@@ -25,22 +75,45 @@
 
 .board-table {
   width: 100%;
+  background: #ffffff;
   border-collapse: collapse;
   margin-bottom: 16px;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .board-table th,
 .board-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  border: none ;
+  padding: 12px;
   text-align: center;
   font-weight: 300;
 }
 
 .board-table th {
   background: #f0f4ea;
-  font-weight: 300;
+  font-weight: 500;
+  border-bottom: 1px solid #97a39c69;
+}
+
+
+.board-table th:first-child,
+.board-table td:first-child {
+  border-left: none;
+}
+
+.board-table th:last-child,
+.board-table td:last-child {
+  border-right: none;
+}
+
+
+.board-table tr:first-child th {
+  border-top: 1px solid #97a39c69;
+}
+
+
+.board-table tr:last-child td {
+  border-bottom: 1px solid #97a39c69;
 }
 
 .title-cell {
@@ -53,38 +126,81 @@
   text-decoration: underline;
 }
 
-/* ───────────────────────────────────────────── 
-   페이징 + 버튼 컨테이너
-───────────────────────────────────────────── */
+
 .pagination-container {
   position: relative;        
-  padding: 0 24px; 
+  padding: 0 24px;          
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
+  height: 60px;             
 }
+
 
 .pagination {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 4px;
-}
-
-.action-buttons {
-  margin-left: auto;        
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   gap: 8px;
-  padding: 0 275px; 
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
+
+.action-buttons {
+  position: absolute;
+  top: 50%;
+  right: 300px;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+
+.page-btn {
+  min-width: 40px;
+  padding: 8px 12px;
+  background: #fff;
+  color: #4a785e;
+  border: 2px solid #4a785e;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
+}
+
+.page-btn:hover {
+  background: #4a785e8a;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  border-color: #ccc;
+  color: #999;
+}
+
+.page-btn.active {
+  background: #4a785e;
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 
 
 .btn.write,
 .btn.edit {
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: px;
   cursor: pointer;
   font-weight: 700;
   font-size: 14px;
@@ -92,7 +208,7 @@
 }
 
 .btn.write {
-  background: linear-gradient(to right, #4a785e, #f0f0b0);
+  background: #4a785e;
   color: #fff;
   border: none;
 }
@@ -100,6 +216,7 @@
 .btn.edit {
   background: #fff;
   color: #4a785e;
+  
   border: 2px solid #4a785e;
 }
 
@@ -109,28 +226,29 @@
 }
 
 @media (max-width: 600px) {
+
   .pagination-container {
     display: flex;
-    flex-direction: column;   
-    justify-content: center;   
-    align-items: center;      
-    width: 100%;
-    padding: 0 8px; 
+    flex-direction: column;   /* ← 가로 → 세로 스택으로 변경 */
+    align-items: center;      /* 내용 가로 중앙 정렬 */
+    padding: 0 24px;
     box-sizing: border-box;
   }
 
   .pagination {
-    display: flex;
-    gap: 4px;
-    margin: 0 auto 12px;       
+    margin: 0 0 12px;         /* 아래쪽 여유 추가 */
   }
 
   .action-buttons {
-    display: flex;
-    gap: 8px;
-    margin: 0;                 
+    position: static;         /* 절대위치 해제 */
+    margin: 80px;                
     padding: 0 5px;
+    gap: 8px;
+    display: flex;
   }
+
+
+
 
   .table-wrapper {
     padding: 0 12px;

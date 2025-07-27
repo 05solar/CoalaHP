@@ -42,7 +42,6 @@ export default function Header() {
           { label: '공지사항',    to: '/board/notice'   },
           { label: '질답게시판',  to: '/board/qna'      },
           { label: '자유게시판',  to: '/board/free'     },
-          { label: '이벤트',      to: '/event'          },
           { label: '게임',        to: '/game'           },
           { label: '회원',        to: '/member'         },
         ].map(({ label, to }) => (

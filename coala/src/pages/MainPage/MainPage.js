@@ -10,6 +10,10 @@ import img4 from "../../images/coala4.PNG";
 import img5 from "../../images/coala5.PNG";
 import img6 from "../../images/coala6.PNG";
 
+import slide1 from "../../images/slide1.PNG";
+import slide2 from "../../images/slide2.PNG";
+import slide3 from "../../images/slide3.PNG";
+
 import "./MainPage.css";
 
 export default function MainPage() {
@@ -20,20 +24,19 @@ export default function MainPage() {
   const carouselRef = useRef(null);
   const itemsRef    = useRef([]);
 
-  // 2) 슬라이더 상태
+  
   const [slideIndex, setSlideIndex] = useState(0);
-  const totalSlides = 3; // 바깥 박스 3개
+  const slideImages = [ slide1, slide2, slide3 ];
+  const totalSlides = slideImages.length;
 
-  // 슬라이더 이전/다음 함수
-  const prevSlide = () => {
+  const prevSlide = () =>
     setSlideIndex(idx => (idx - 1 + totalSlides) % totalSlides);
-  };
-  const nextSlide = () => {
+  const nextSlide = () =>
     setSlideIndex(idx => (idx + 1) % totalSlides);
-  };
 
   // 3D 캐로셀에 사용할 이미지
   const carouselImages = [img1, img2, img3, img4, img5, img6];
+
 
   useEffect(() => {
     const container = containerRef.current;
@@ -151,7 +154,6 @@ export default function MainPage() {
           ))}
         </section>
 
-        {/* 슬라이더 배너 섹션 */}
         <section className="slider-container">
           <button className="slider-btn prev" onClick={prevSlide}>&lt;</button>
           <div className="slider">
@@ -159,9 +161,11 @@ export default function MainPage() {
               className="slider-track"
               style={{ transform: `translateX(-${slideIndex * 100}%)` }}
             >
-              <div className="slide box-left" />
-              <div className="slide box-center" />
-              <div className="slide box-right" />
+              {slideImages.map((src, i) => (
+                <div className="slide" key={i}>
+                  <img src={src} alt={`slide-${i}`} className="slide-image" />
+                </div>
+              ))}
             </div>
           </div>
           <button className="slider-btn next" onClick={nextSlide}>&gt;</button>
