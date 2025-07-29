@@ -1,34 +1,96 @@
-name: Deploy React App to GitHub Pages
-
+name: Deploy coala-web-fe project
 on:
   push:
     branches:
-      - master   # 또는 main
+      - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-
+    env:
+      CI: false  # 임시방편임.
+    
     steps:
       # 1) 코드 체크아웃
       - uses: actions/checkout@v3
-
+      
       # 2) Node.js 설치
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
-
+          cache: "npm"
+      
       # 3) 의존성 설치
       - name: Install dependencies
-        run: npm ci
-
+        run: npm install
+      
       # 4) 앱 빌드
       - name: Build
         run: npm run build
-
-      # 5) GitHub Pages 환경에 배포
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+      
+      # 5) 빌드 파일 저장
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          name: build-files
+          path: build/
+          retention-days: 1
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1) 빌드파일 불러오기
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-files
+          path: build/
+    
+      # 2) 서버 빌드 파일 백업
+      - name: Backup existing build on server
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.COALA_WEB_FE_HOST }}
+          username: ${{ secrets.COALA_WEB_FE_USERNAME }}
+          key: ${{ secrets.COALA_WEB_FE_SSH_PRIVATE_KEY }}
+          port: ${{ secrets.COALA_WEB_FE_PORT }}
+          script: |
+            # 서버 프로젝트 디렉토리 이동
+            cd /home/ubuntu/coala-web-fe
+            
+            # 기존 빌드 파일 백업
+            if [ -d "build" ]; then
+              mv build ./build_backup/build_backup_$(date +%Y%m%d_%H%M%S)
+            fi
+            
+            # 새로운 빌드 디렉토리 생성
+            mkdir -p build
+      
+      # 3) 빌드파일 복사
+      - name: Copy build files to server
+        uses: appleboy/scp-action@v0.1.5
+        with:
+          host: ${{ secrets.COALA_WEB_FE_HOST }}
+          username: ${{ secrets.COALA_WEB_FE_USERNAME }}
+          key: ${{ secrets.COALA_WEB_FE_SSH_PRIVATE_KEY }}
+          port: ${{ secrets.COALA_WEB_FE_PORT }}
+          source: "build/*"
+          target: "/home/ubuntu/coala-web-fe/"
+          strip_components: 0
+      
+      # 4) nginx 재시작
+      - name: Restart Nginx
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.COALA_WEB_FE_HOST }}
+          username: ${{ secrets.COALA_WEB_FE_USERNAME }}
+          key: ${{ secrets.COALA_WEB_FE_SSH_PRIVATE_KEY }}
+          port: ${{ secrets.COALA_WEB_FE_PORT }}
+          script: |
+            # Nginx 재시작
+            sudo systemctl reload nginx
+            
+            echo "배포 성공"
