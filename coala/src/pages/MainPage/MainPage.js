@@ -1,8 +1,8 @@
 // src/pages/MainPage/MainPage.js
-
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// 3D 캐로셀 이미지
 import img1 from "../../images/coala1.PNG";
 import img2 from "../../images/coala2.PNG";
 import img3 from "../../images/coala3.PNG";
@@ -10,6 +10,7 @@ import img4 from "../../images/coala4.PNG";
 import img5 from "../../images/coala5.PNG";
 import img6 from "../../images/coala6.PNG";
 
+// 슬라이더 배너 이미지
 import slide1 from "../../images/slide1.PNG";
 import slide2 from "../../images/slide2.PNG";
 import slide3 from "../../images/slide3.PNG";
@@ -19,42 +20,39 @@ import "./MainPage.css";
 export default function MainPage() {
   const navigate = useNavigate();
 
-  // 1) 캐로셀 refs
+  // 3D 캐로셀 refs
   const containerRef = useRef(null);
   const carouselRef = useRef(null);
-  const itemsRef    = useRef([]);
+  const itemsRef = useRef([]);
 
-  
+  // 슬라이더 배너 상태
   const [slideIndex, setSlideIndex] = useState(0);
-  const slideImages = [ slide1, slide2, slide3 ];
+  const slideImages = [slide1, slide2, slide3];
   const totalSlides = slideImages.length;
 
-  const prevSlide = () =>
-    setSlideIndex(idx => (idx - 1 + totalSlides) % totalSlides);
-  const nextSlide = () =>
-    setSlideIndex(idx => (idx + 1) % totalSlides);
+  const prevSlide = () => setSlideIndex(idx => (idx - 1 + totalSlides) % totalSlides);
+  const nextSlide = () => setSlideIndex(idx => (idx + 1) % totalSlides);
 
-  // 3D 캐로셀에 사용할 이미지
+  // 3D 캐로셀 이미지 배열
   const carouselImages = [img1, img2, img3, img4, img5, img6];
-
 
   useEffect(() => {
     const container = containerRef.current;
-    const carousel  = carouselRef.current;
-    const items     = itemsRef.current;
+    const carousel = carouselRef.current;
+    const items = itemsRef.current;
 
     const count = carouselImages.length;
-    const deg   = 360 / count;
-    const gap   = 20;
+    const deg = 360 / count;
+    const gap = 20;
     let isMouseDown = false;
-    let currentX    = 0;
-    let lastX       = 0;
-    let moveTo      = 0;
-    let lastMoveTo  = 0;
+    let currentX = 0;
+    let lastX = 0;
+    let moveTo = 0;
+    let lastMoveTo = 0;
     const AUTO_SPEED = 0.05;
 
     function setupCarousel() {
-      const w  = container.offsetWidth;
+      const w = container.offsetWidth;
       const tz = w / 2 / Math.tan(Math.PI / count) + gap;
       items.forEach((item, i) => {
         item.style.setProperty("--rotatey", `${deg * i}deg`);
@@ -66,36 +64,23 @@ export default function MainPage() {
       return n * (a - b) + b;
     }
 
-  function update() {
-    // 1) 마우스 드래그 중이 아닐 땐 자동 회전
-    if (!isMouseDown) {
-      moveTo += AUTO_SPEED;
+    function update() {
+      if (!isMouseDown) moveTo += AUTO_SPEED;
+      lastMoveTo = lerp(moveTo, lastMoveTo, 0.05);
+      carousel.style.setProperty("--rotatey", `${lastMoveTo}deg`);
+      const angle = ((lastMoveTo % 360) + 360) % 360;
+      const shifted = (angle + deg * 0.5) % 360;
+      let frontIndex = Math.floor(shifted / deg) % count;
+      frontIndex = (count - frontIndex) % count;
+      items.forEach((item, idx) => {
+        item.classList.toggle("active", idx === frontIndex);
+      });
+      requestAnimationFrame(update);
     }
-
-    lastMoveTo = lerp(moveTo, lastMoveTo, 0.05);
-    carousel.style.setProperty("--rotatey", `${lastMoveTo}deg`);
-    const angle = ((lastMoveTo % 360) + 360) % 360;
-
-    const shifted = (angle + deg * 0.50) % 360;
-    let frontIndex = Math.floor(shifted / deg) % count;
-    frontIndex = (count - frontIndex) % count;
-
-    items.forEach((item, idx) => {
-      item.classList.toggle("active", idx === frontIndex);
-    });
-
-    requestAnimationFrame(update);
-  }
 
     function onResize() { setupCarousel(); }
-    function onMouseDown() {
-      isMouseDown = true;
-      carousel.style.cursor = "grabbing";
-    }
-    function onMouseUp() {
-      isMouseDown = false;
-      carousel.style.cursor = "grab";
-    }
+    function onMouseDown() { isMouseDown = true; carousel.style.cursor = "grabbing"; }
+    function onMouseUp() { isMouseDown = false; carousel.style.cursor = "grab"; }
     function onMouseMove(e) {
       if (!isMouseDown) return;
       currentX = e.clientX;
@@ -112,17 +97,17 @@ export default function MainPage() {
     carousel.addEventListener("touchstart", onMouseDown);
     carousel.addEventListener("touchend", onMouseUp);
     carousel.addEventListener("touchmove", e => onMouseMove(e.touches[0]));
-    container.addEventListener("mouseleave", () => isMouseDown = false);
+    container.addEventListener("mouseleave", () => (isMouseDown = false));
 
     return () => {
       window.removeEventListener("resize", onResize);
-      // (필요 시 나머지 이벤트도 해제)
     };
   }, [carouselImages.length]);
 
   return (
     <div className="container">
       <main className="main-content">
+
         {/* 3D 캐로셀 섹션 */}
         <section className="introduce-section">
           <div ref={containerRef} className="container-carrossel">
@@ -140,9 +125,25 @@ export default function MainPage() {
           </div>
         </section>
 
+        {/* 중간 소개 섹션 추가 */}
+        <section className="mid-intro">
+          <div className="mid-intro-content">
+            <h2>
+              <span className="highlight-co">CO</span>ding +{' '}
+              <span className="highlight-al">AL</span>gorithm +{' '}
+              <span className="highlight-al">A</span>cademic club
+            </h2>
+            <p>
+              COALA는 누구나 쉽고 재미있게 코딩을 배우고,
+              <br />
+              함께 성장하며 꿈을 실현할 수 있도록 돕습니다.
+            </p>
+          </div>
+        </section>
+
         {/* 카드 섹션 */}
         <section className="card-section">
-          {["notice", "event", "board"].map(title => (
+          {['notice', 'event', 'board'].map(title => (
             <div className="card" key={title}>
               <div className="card-header"><h3>{title}</h3></div>
               <ul className="card-list">
@@ -154,6 +155,7 @@ export default function MainPage() {
           ))}
         </section>
 
+        {/* 슬라이더 배너 섹션 */}
         <section className="slider-container">
           <button className="slider-btn prev" onClick={prevSlide}>&lt;</button>
           <div className="slider">
@@ -170,6 +172,7 @@ export default function MainPage() {
           </div>
           <button className="slider-btn next" onClick={nextSlide}>&gt;</button>
         </section>
+
       </main>
     </div>
   );

@@ -229,18 +229,18 @@ body, .board-table th, .board-table td {
 
   .pagination-container {
     display: flex;
-    flex-direction: column;   /* ← 가로 → 세로 스택으로 변경 */
-    align-items: center;      /* 내용 가로 중앙 정렬 */
+    flex-direction: column;   
+    align-items: center;      
     padding: 0 24px;
     box-sizing: border-box;
   }
 
   .pagination {
-    margin: 0 0 12px;         /* 아래쪽 여유 추가 */
+    margin: 0 0 12px;         
   }
 
   .action-buttons {
-    position: static;         /* 절대위치 해제 */
+    position: static;        
     margin: 80px;                
     padding: 0 5px;
     gap: 8px;

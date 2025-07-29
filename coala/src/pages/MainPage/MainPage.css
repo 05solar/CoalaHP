@@ -83,6 +83,46 @@ body {
   }
 }
 
+/* ───────────────────────────────────────────── 
+   중간 소개 섹션 스타일
+───────────────────────────────────────────── */
+.mid-intro {
+  background: #ffffff;
+  max-width: 1000px;
+  margin: 0 auto 30px;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px #a3c9b4;
+  margin-top: 50px;
+}
+
+.mid-intro-content h2 .highlight-co {
+  color: #4a785e; 
+}
+
+.mid-intro-content h2 .highlight-al {
+  color: #4a785e; 
+}
+.mid-intro-content h2 .highlight-a {
+  color: #4a785e; 
+}
+
+
+.mid-intro-content h2 {
+  margin: 0 0 13px;
+  font-size: 24px;
+  color: #000000;
+  text-align: center;
+}
+.mid-intro-content p {
+  margin: 0;
+  font-size: 16px;
+  color: #000000;
+  line-height: 1.6;
+  text-align: center;
+
+}
+
 /* Card Section */
 .card-section {
   display: grid;
